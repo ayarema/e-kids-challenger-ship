@@ -8,8 +8,8 @@ SCREEN_HEIGHT = 800
 # з яким ми будемо працювати
 BACK_GROUND_COLOR = (102, 205, 170)
 WHITE = (255, 255, 255)
-YELLOW = (255, 255, 255)
-LIGHT_BEIGE = (255, 255, 255)
+YELLOW = (255, 255, 0)
+LIGHT_BEIGE = (255, 250, 239)
 
 # Ініціалізація всіх допоміжних команд з модулем PYGAME
 pygame.init()
