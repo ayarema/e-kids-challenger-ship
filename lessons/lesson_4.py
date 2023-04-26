@@ -1,5 +1,4 @@
-from GameSpaceships import *
-import random
+from GameSpaceships_lesson4 import *
 
 class Game:
 
@@ -68,12 +67,9 @@ class Game:
 
         # Створюємо змінну типу масив, в якій зберігаємо обʼєкти, прямокутники, згідно з координатами у малюнку
         self.challenger_images = [
-            pygame.Rect(0, 99, 102, 126),
-            pygame.Rect(165, 360, 102, 126),
-            pygame.Rect(165, 234, 102, 126),
-            pygame.Rect(330, 624, 102, 126),
-            pygame.Rect(330, 498, 102, 126),
-            pygame.Rect(432, 624, 102, 126)
+            pygame.Rect(0, 99, 102, 126), pygame.Rect(165, 360, 102, 126),
+            pygame.Rect(165, 234, 102, 126), pygame.Rect(330, 624, 102, 126),
+            pygame.Rect(330, 498, 102, 126), pygame.Rect(432, 624, 102, 126)
         ]
 
         # Створюємо змінну типу лист, в якій будемо зберігати координати
@@ -81,21 +77,6 @@ class Game:
 
         # Створюємо змінну, обʼєкт нашого космічного корабля, за допомогою якої будемо керувати й видозмінювати наш корабель
         self.challenger = Challenger(self.spaceship_images, self.challenger_images, self.challenger_position)
-
-        # Створюємо змінну, обʼєкт куль, які використовує наш космічний корабель
-        self.challenger_bullet = pygame.Rect(1004, 987, 9, 21)
-        self.bullet_images = self.spaceship_images.subsurface(self.challenger_bullet)
-
-        # Створюємо змінну, обʼєкт Імперський зоряний руйнівник, які будуть летіти нам назустріч
-        self.venator = pygame.Rect(534, 612, 57, 43)
-        self.venator_images = self.spaceship_images.subsurface(self.venator)
-        self.venator_down_images = [
-            self.spaceship_images.subsurface(pygame.Rect(267, 347, 57, 43)),
-            self.spaceship_images.subsurface(pygame.Rect(873, 697, 57, 43)),
-            self.spaceship_images.subsurface(pygame.Rect(267, 296, 57, 43)),
-            self.spaceship_images.subsurface(pygame.Rect(930, 697, 57, 43))]
-
-        self.venators = pygame.sprite.Group()
 
         # Також ми можемо контролювати FPS у нашій грі, для цього зробім наступне -
         self.CLOCK = pygame.time.Clock()
@@ -136,15 +117,6 @@ class Game:
                     pygame.quit()
                     quit()
 
-            # Генеруємо Імперські кораблі
-            venator_position = [random.randint(0, SCREEN_WIDTH - self.venator.width), 0]
-            venator_ship = VenatorsShip(self.venator_images, self.venator_down_images, venator_position)
-            self.venators.add(venator_ship)
-
-            # Використовуємо цикл, й вказуємо, щоб всі Імперські кораблі почали рухатись
-            # for single_venator in self.venators:
-            #    single_venator.move()
-
             # Створюємо змінну, в якій будемо зберігати масив клавіш, які може натиснути користувач з клавіатури
             key_pressed = pygame.key.get_pressed()
 
@@ -161,9 +133,6 @@ class Game:
                 self.challenger.moveRight()
 
             self.screen.blit(self.GAME_BACKGROUND, (0, 0))
-
-            # Малюємо наші космічні імперські кораблі на екрані гри
-            #self.venators.draw(self.screen)
 
             # Малюємо наш космічний корабель на екрані гри
             self.screen.blit(self.challenger.image[self.challenger.img_index], self.challenger.rect)
