@@ -27,7 +27,7 @@ class Challenger(pygame.sprite.Sprite):
             self.image.append(spaceships_images.subsurface(challenger_images[i]).convert_alpha())
         self.rect = challenger_images[0]
         self.rect.topleft = initial_position
-        self.speed = 8
+        self.speed = 5
         self.bullets = pygame.sprite.Group()
         self.img_index = 0
         self.is_hit = False
