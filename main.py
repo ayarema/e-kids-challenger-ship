@@ -2,6 +2,7 @@ from sys import exit
 from GameSpaceships import *
 import random
 
+
 class Game:
 
     def __init__(self):
@@ -18,7 +19,7 @@ class Game:
         # Задати розміри екрана нашої гри
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-        # Ініціалізація аудіо-підсистеми Pygame
+        # Ініціалізація аудіопідсистеми Pygame
         pygame.mixer.pre_init()
 
         # Назва нашої гри
@@ -42,7 +43,7 @@ class Game:
         self.instructions_x = (SCREEN_WIDTH - self.instructions_width) / 2
         self.instructions_y = (SCREEN_HEIGHT - self.instructions_height) / 2
 
-        ###### --- Блок коду який відповідає за музику у грі --- ######
+        # --- Блок коду який відповідає за музику у грі --- #
         # Створимо змінну у якій збережемо нашу музику для стартової сторінки
         pygame.mixer.music.load('resources/start_game2.wav')
         pygame.mixer.music.set_volume(0.15)
@@ -63,7 +64,7 @@ class Game:
         # Створимо змінну у якій збережемо нашу музику для вибуху опонента й надати їй певного рівня гучності
         self.venator_down_sound = pygame.mixer.Sound('resources/opponent1_down.wav')
         self.venator_down_sound.set_volume(0.3)
-        ###### --- Кінець блоку коду який відповідає за музику у грі --- ######
+        # --- Кінець блоку коду який відповідає за музику у грі --- #
 
         # Завантажити малюнок, який буде фоном у нашій грі
         self.game_background = pygame.image.load('resources/background.png').convert()
@@ -82,8 +83,8 @@ class Game:
         # Створюємо змінну в якій будемо зберігати завантажений у нашу гру цей малюнок
         self.spaceship_images = pygame.image.load(self.filename)
 
-        # Сказати модулю PYGAME, що ми хочемо встановити іконку для нашої гри яку буде видно у "пуску" або у верхньому куті
-        # самої програми, тобто нашої гри
+        # Сказати модулю PYGAME, що ми хочемо встановити іконку для нашої гри яку буде видно у "пуску" або у
+        # верхньому куті самої програми, тобто нашої гри
         pygame.display.set_icon(self.ufo)
 
         # Створюємо змінну типу масив, в якій зберігаємо обʼєкти, прямокутники, згідно з координатами у малюнку
@@ -99,7 +100,8 @@ class Game:
         # Створюємо змінну типу лист, в якій будемо зберігати координати
         self.challenger_position = [200, 600]
 
-        # Створюємо змінну, обʼєкт нашого космічного корабля, за допомогою якої будемо керувати й видозмінювати наш корабель
+        # Створюємо змінну, обʼєкт нашого космічного корабля, за допомогою якої будемо керувати й видозмінювати наш
+        # корабель
         self.challenger = Challenger(self.spaceship_images, self.challenger_images, self.challenger_position)
 
         # Створюємо змінну, обʼєкт куль, які використовує наш космічний корабель
@@ -154,7 +156,6 @@ class Game:
             self.screen.blit(self.text_title, (self.title_x, self.title_y))
             self.screen.blit(self.text_instructions, (self.instructions_x, self.instructions_y))
             pygame.display.update()
-
 
     def play_game(self):
 
@@ -245,7 +246,8 @@ class Game:
                     self.venators_down.remove(single_venator_down)
                     self.score += 1000
                     continue
-                self.screen.blit(single_venator_down.down_imgs[single_venator_down.down_index // 2], single_venator_down.rect)
+                self.screen.blit(single_venator_down.down_imgs[single_venator_down.down_index // 2],
+                                 single_venator_down.rect)
                 single_venator_down.down_index += 1
 
             # Створюємо змінну, в якій будемо зберігати масив клавіш, які може натиснути користувач з клавіатури
@@ -255,13 +257,13 @@ class Game:
             # Гравець нашої гри може користуватись WASD чи стрілками, ми обробляємо цю подію й керуємо нашим космічним
             # кораблем у відповідності натискання на клавіші, що натискає користувач, будемо рухати корабель
             if key_pressed[pygame.K_w] or key_pressed[pygame.K_UP]:
-                self.challenger.moveUp()
+                self.challenger.move_up()
             if key_pressed[pygame.K_s] or key_pressed[pygame.K_DOWN]:
-                self.challenger.moveDown()
+                self.challenger.move_down()
             if key_pressed[pygame.K_a] or key_pressed[pygame.K_LEFT]:
-                self.challenger.moveLeft()
+                self.challenger.move_left()
             if key_pressed[pygame.K_d] or key_pressed[pygame.K_RIGHT]:
-                self.challenger.moveRight()
+                self.challenger.move_right()
 
             # Малюємо на нашому екрані гри кулю, яка прикріплена до нашого космічного корабля
             self.challenger.bullets.draw(self.screen)

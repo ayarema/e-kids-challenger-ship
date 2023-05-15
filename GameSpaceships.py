@@ -32,25 +32,25 @@ class Challenger(pygame.sprite.Sprite):
         self.img_index = 0
         self.is_hit = False
 
-    def moveUp(self):
+    def move_up(self):
         if self.rect.top <= 0:
             self.rect.top = 0
         else:
             self.rect.top -= self.speed
 
-    def moveDown(self):
+    def move_down(self):
         if self.rect.top >= SCREEN_HEIGHT - self.rect.height:
             self.rect.top = SCREEN_HEIGHT - self.rect.height
         else:
             self.rect.top += self.speed
 
-    def moveLeft(self):
+    def move_left(self):
         if self.rect.left <= 0:
             self.rect.left = 0
         else:
             self.rect.left -= self.speed
 
-    def moveRight(self):
+    def move_right(self):
         if self.rect.left >= SCREEN_WIDTH - self.rect.width:
             self.rect.left = SCREEN_WIDTH - self.rect.width
         else:
@@ -58,7 +58,7 @@ class Challenger(pygame.sprite.Sprite):
 
     # Додаємо нову функцію яка буде відповідати за кулі, якими стріляє наш космічний корабель
     def shoot(self, bullet_images):
-        bullet = Bullet(bullet_images, self.rect.midtop)
+        bullet: Bullet = Bullet(bullet_images, self.rect.midtop)
         self.bullets.add(bullet)
 
 
